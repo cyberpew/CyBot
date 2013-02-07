@@ -45,7 +45,7 @@ public class CyBot {
 		bot.setLogin(Config.user);
 		bot.setName(Config.nick);
 		bot.identify(Config.pass);
-		bot.setVerbose(true);
+		bot.setVerbose(false);
 		
 		//Internal connection start
 		if(Config.SSL && !Config.serverpass.isEmpty()) {
@@ -64,6 +64,9 @@ public class CyBot {
 		
 		
 		setupDatabase();
+		
+		
+		loadListeners();
 		
 		
 		stopCommand();
