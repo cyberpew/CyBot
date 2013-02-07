@@ -89,6 +89,7 @@ public class CyBot {
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Seen());
+		bot.getListenerManager().addListener(new Google());
 	}
 	
 	private static void setupDatabase() {
