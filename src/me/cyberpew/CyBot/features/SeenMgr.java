@@ -27,7 +27,7 @@ public class SeenMgr extends ListenerAdapter {
 		if(rs.next()) {
 			CyBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
 		} else {
-			CyBot.mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') ");
+			CyBot.mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
 		}
 		CyBot.mysql.close();
 	}

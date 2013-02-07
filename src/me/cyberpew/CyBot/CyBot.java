@@ -124,7 +124,7 @@ public class CyBot {
 	public static void stopCommand() {
 		Scanner reader = new Scanner(System.in);
 		String command = reader.nextLine();
-		if (command.equals("end")) {
+		if (command.equals("stop")) {
 			bot.shutdown();
 			System.out.println("Goodbye~");
 			System.exit(0);
