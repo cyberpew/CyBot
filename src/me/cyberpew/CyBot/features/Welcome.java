@@ -15,8 +15,6 @@ public class Welcome extends ListenerAdapter {
 		String channel = event.getChannel().getName();
 		
 		ResultSet rs = CyBot.mysql.query("SELECT * FROM joinedusers WHERE users='" + user + "'");
-		
-		if (channel.equals("#cyberspace")) {
 			
 			if (rs.next()) {
 				//nope
@@ -24,8 +22,8 @@ public class Welcome extends ListenerAdapter {
 				
 				CyBot.mysql.query("INSERT INTO joinedusers (users) VALUES ('" + user + "')");
 				CyBot.mysql.close();
-				event.respond("Hello there, " + user);
+				event.respond("Hello there!");
 			}
-		}
 	}
+
 }
