@@ -86,6 +86,7 @@ public class CyBot {
 		//Load Features
 		bot.getListenerManager().addListener(new Welcome());
 		bot.getListenerManager().addListener(new SeenMgr());
+		bot.getListenerManager().addListener(new RecieveCookies());
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Seen());
