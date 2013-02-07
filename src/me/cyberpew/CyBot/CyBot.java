@@ -90,6 +90,10 @@ public class CyBot {
 		//Load Commands
 		bot.getListenerManager().addListener(new Seen());
 		bot.getListenerManager().addListener(new Google());
+		bot.getListenerManager().addListener(new Join());
+		bot.getListenerManager().addListener(new Part());
+		bot.getListenerManager().addListener(new MinecraftStatus());
+		bot.getListenerManager().addListener(new MinecraftPaid());
 	}
 	
 	private static void setupDatabase() {
