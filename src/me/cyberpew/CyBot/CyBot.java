@@ -93,6 +93,9 @@ public class CyBot {
 		bot.getListenerManager().addListener(new Google());
 		bot.getListenerManager().addListener(new Join());
 		bot.getListenerManager().addListener(new Part());
+		bot.getListenerManager().addListener(new ListOps());
+		bot.getListenerManager().addListener(new ListHalfOps());
+		bot.getListenerManager().addListener(new ListVoiced());
 		bot.getListenerManager().addListener(new MinecraftStatus());
 		bot.getListenerManager().addListener(new MinecraftPaid());
 		bot.getListenerManager().addListener(new Stack());
