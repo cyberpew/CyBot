@@ -100,6 +100,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new MinecraftPaid());
 		bot.getListenerManager().addListener(new Stack());
 		bot.getListenerManager().addListener(new Kill());
+		bot.getListenerManager().addListener(new Nick());
 	}
 	
 	private static void setupDatabase() {
