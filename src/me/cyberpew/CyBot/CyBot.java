@@ -81,8 +81,14 @@ public class CyBot {
 	
 	public static void loadListeners() throws Exception {
 		
-		//load features & commands in 'bot.getListenerManager().addListener(new FEATURE_NAME());' format.
+		//#load features & commands in 'bot.getListenerManager().addListener(new FEATURE_NAME());' format.
+		//
+		//Load Features
 		bot.getListenerManager().addListener(new Welcome());
+		bot.getListenerManager().addListener(new SeenMgr());
+		
+		//Load Commands
+		bot.getListenerManager().addListener(new Seen());
 	}
 	
 	private static void setupDatabase() {
