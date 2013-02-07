@@ -6,6 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import me.cyberpew.CyBot.Config;
 import me.cyberpew.CyBot.CyBot;
 
+@SuppressWarnings("rawtypes")
 public class Join extends ListenerAdapter {
 	
 	public void onMessage(MessageEvent event) throws Exception {

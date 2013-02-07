@@ -13,6 +13,7 @@ import org.pircbotx.hooks.events.PartEvent;
 
 import me.cyberpew.CyBot.CyBot;
 
+@SuppressWarnings("rawtypes")
 public class SeenMgr extends ListenerAdapter {
 	
 	public void onJoin(JoinEvent event) throws SQLException {

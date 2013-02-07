@@ -3,6 +3,7 @@ package me.cyberpew.CyBot.features;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
 
+@SuppressWarnings("rawtypes")
 public class RecieveCookies extends ListenerAdapter {
 	
 	public void onAction(ActionEvent event){

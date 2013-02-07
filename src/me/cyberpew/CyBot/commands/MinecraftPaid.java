@@ -8,6 +8,7 @@ import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+@SuppressWarnings("rawtypes")
 public class MinecraftPaid extends ListenerAdapter {
 	
 	public void onMessage(MessageEvent event) throws Exception {

@@ -129,6 +129,7 @@ public class CyBot {
 	
 	
 	public static void stopCommand() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		String command = reader.nextLine();
 		if (command.equals("stop")) {

@@ -7,12 +7,12 @@ import me.cyberpew.CyBot.CyBot;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.JoinEvent;
 
+@SuppressWarnings("rawtypes")
 public class Welcome extends ListenerAdapter {
 	
 	public void onJoin(JoinEvent event) throws Exception {
 		CyBot.mysql.open();
 		String user = event.getUser().getNick();
-		String channel = event.getChannel().getName();
 		
 		ResultSet rs = CyBot.mysql.query("SELECT * FROM joinedusers WHERE users='" + user + "'");
 			

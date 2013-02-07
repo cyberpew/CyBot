@@ -11,6 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import com.google.gson.Gson;
 
+@SuppressWarnings("rawtypes")
 public class Google extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {

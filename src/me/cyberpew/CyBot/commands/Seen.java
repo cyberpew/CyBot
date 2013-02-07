@@ -8,6 +8,7 @@ import me.cyberpew.CyBot.CyBot;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+@SuppressWarnings("rawtypes")
 public class Seen extends ListenerAdapter {
 	public void onMessage(MessageEvent event) throws SQLException {
 		if (event.getMessage().split(" ").length > 1) {
