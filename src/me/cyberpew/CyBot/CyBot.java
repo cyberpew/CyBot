@@ -95,6 +95,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new Part());
 		bot.getListenerManager().addListener(new MinecraftStatus());
 		bot.getListenerManager().addListener(new MinecraftPaid());
+		bot.getListenerManager().addListener(new Stack());
 	}
 	
 	private static void setupDatabase() {
