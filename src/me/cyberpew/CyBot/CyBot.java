@@ -108,7 +108,7 @@ public class CyBot {
 			
 			if (!mysql.checkTable("seenusers")) {
 				System.out.println("Creating table 'seenusers' in database " + mysql_db);
-				mysql.createTable("CREATE TABLE seenusers (id int NOT NULL AUTO_INCREMENT, user VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
+				mysql.createTable("CREATE TABLE seenusers (id int NOT NULL AUTO_INCREMENT, user VARCHAR(32) NOT NULL, lastseen VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 			}
 			if (!mysql.checkTable("joinedusers")) {
 				System.out.println("Creating table 'joinedusers' in database " + mysql_db);
