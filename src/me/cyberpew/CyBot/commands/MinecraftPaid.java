@@ -19,9 +19,7 @@ public class MinecraftPaid extends ListenerAdapter {
 			}
 			
 			String userarg = event.getMessage().split(" ")[1];
-			
 			if (event.getMessage().startsWith(".mcpaid ") && event.getMessage().contains(userarg)) {
-				try {
 					URL url = new URL("http://minecraft.net/haspaid.jsp?user=" + userarg);
 					BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 					String str;
@@ -31,11 +29,7 @@ public class MinecraftPaid extends ListenerAdapter {
 						}
 						if(str.equalsIgnoreCase("false")){
 							event.respond("The user " + userarg + " has " + Colors.RED + "not " + Colors.NORMAL + "paid for Minecraft!");
-						}
 					}
-					in.close();
-				}catch(java.io.IOException el) {
-					el.printStackTrace();
 				}
 			}
 		}
