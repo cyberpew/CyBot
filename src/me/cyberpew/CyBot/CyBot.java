@@ -1,122 +1,126 @@
 package me.cyberpew.CyBot;
 
-import java.io.BufferedReader;
+//Java imports
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.logging.Logger;
 
-import me.cyberpew.CyBot.features.Google;
-import me.cyberpew.CyBot.features.Core;
-import me.cyberpew.CyBot.features.MinecraftStatus;
-import me.cyberpew.CyBot.features.Administrate;
-import me.cyberpew.CyBot.features.Misc;
-
-import org.pircbotx.Channel;
-import org.pircbotx.Colors;
+//PircBotX imports
 import org.pircbotx.PircBotX;
-import org.pircbotx.User;
-import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.ActionEvent;
-import org.pircbotx.hooks.events.InviteEvent;
-import org.pircbotx.hooks.events.KickEvent;
-import org.pircbotx.hooks.events.MessageEvent;
-import org.pircbotx.hooks.events.PrivateMessageEvent;
-import org.pircbotx.hooks.events.ServerResponseEvent;
+import org.pircbotx.UtilSSLSocketFactory;
 
+//CyBot imports
+import me.cyberpew.Data.*;
+import me.cyberpew.CyBot.commands.*;
+import me.cyberpew.CyBot.features.*;
 
-public class CyBot extends ListenerAdapter {
-	String prefix = ".";
-	String owners = "Cyberpew";
-	static Scanner in = new Scanner(System.in);
-	public static void main(String[] args) {
-		PircBotX bot = new PircBotX(); // make a new bot
-		System.out.println("CyBot 2.0 initialized.");
-		System.out.println("Author: Cyberpew");
-		System.out.println("Enter the name of the bot:");
-		bot.setName(in.nextLine());
-		bot.setAutoNickChange(true);
-		//loadfeatures
-		bot.getListenerManager().addListener(new CyBot());
-		bot.getListenerManager().addListener(new Google());
-		bot.getListenerManager().addListener(new Core());
-		bot.getListenerManager().addListener(new MinecraftStatus());
-		bot.getListenerManager().addListener(new Administrate());
-		bot.getListenerManager().addListener(new Misc());
-		try {
-			bot.setVersion("2.0");
-			bot.setLogin("CyBot");
-			System.out.println("enable debug output? (true/false)");
-			boolean debug = in.nextBoolean();
-			if(debug){
-				bot.setVerbose(true);
-			}
-			if(!debug){
-				bot.setVerbose(false);
-			}
-			System.out.println("Enter the irc server you wish to connect to:");
-			String srv = in.next();
-			System.out.println("Connecting to "+srv + "!");
-			System.out.println("this can take a few seconds...");
-			if(srv != null){
-				bot.connect(srv);
-				System.out.println("Succesfully connected to " + bot.getServer());
-			}
-			System.out.println("identify with nickserv? (true/false)");
-			boolean auth = in.nextBoolean();
-			if(auth){
-				System.out.println("Input the password for nickserv:");
-				String pass = in.next();
-				bot.sendRawLine("ns id " + pass);
-			}
-			System.out.println("Enter the channel you wish to connect to:");
-			String chan = in.next();
-			bot.joinChannel(chan);
-			System.out.println("Connected to " + chan + "!");
-		}catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	@Override
+public class CyBot {
 	
-
-	public void onInvite(InviteEvent e) { 
-		String line = String.format("[Invite] %s invited %S to channel %S", e.getUser(), e.getBot().getNick(), e.getChannel());
-		System.out.println(line);
-		if(owners.contains(e.getUser())){
-			e.getBot().joinChannel(e.getChannel());	
-		}else{
-			e.getBot().sendMessage(e.getUser(), "Sorry, you need to be on the list of owners to invite this bot!");
+	public static PircBotX bot = new PircBotX();
+	public final static Logger logger = Logger.getLogger("CyBot");
+	
+	static String mysql_host;
+    static String mysql_db;
+    static String mysql_user;
+    static String mysql_pass;
+    static String mysql_port;
+    public static MySQL mysql;
+	
+    public static void main(String[] args) throws Exception,
+			FileNotFoundException, IOException {
+		
+		//Load properties
+		try {
+			
+			Config.loadConfig();
+			
+		} catch (FileNotFoundException ex) {
+			//generate file if does not exist 
 		}
-	}	
-	public void onAction(ActionEvent e){
-		String a = String.format("[Action] [%s] %s %s", e.getChannel().getName(), e.getUser().getNick(), e.getAction());
-		System.out.println(a);
-		String action = e.getAction().toLowerCase();
-		String name = e.getBot().getNick().toLowerCase();
-		if(action.contains("gives") && (action.contains(name)) && (action.contains("cookies"))){;
-		e.getBot().sendAction(e.getChannel(), "noms the cookies");
-		e.getBot().sendMessage(e.getChannel(),e.getUser().getNick() + ": Thanks for the cookies! :D");
+		
+		//Connect Block
+		bot.setAutoNickChange(true);
+		bot.setVersion("CyBot v2.0, by Cyberpew");
+		bot.setLogin(Config.user);
+		bot.setName(Config.nick);
+		bot.identify(Config.pass);
+		bot.setVerbose(true);
+		
+		//Internal connection start
+		if(Config.SSL && !Config.serverpass.isEmpty()) {
+			bot.connect(Config.server, Config.port, Config.serverpass, new UtilSSLSocketFactory().trustAllCertificates());
+		} else if (Config.SSL && Config.serverpass.isEmpty()) {
+			bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates());
+		} else {
+			bot.connect(Config.server, Config.port);
+		}
+		
+		bot.setMessageDelay(Config.messagedelay);
+		bot.setAutoReconnect(true);
+		bot.setAutoReconnectChannels(true);
+		
+		joinChannels();
+		
+		
+		setupDatabase();
+		
+		
+		stopCommand();
+	}
+	
+	public static void joinChannels() {
+		
+		for (int i = 0; i < Config.channels.length; i++) {
+			bot.joinChannel(Config.channels[i]);
 		}
 	}
-	public void onNotice(PrivateMessageEvent e){
-		System.out.println("Private message from " + e.getUser().getNick());
-		if(owners.contains(e.getUser().getNick())){
-			System.out.println(e.getUser() + "is the bots owner");
-			StringBuilder sb = new StringBuilder();
-			String[] arguments = e.getMessage().split(" ");
-			for (int i = 1; i < arguments.length; i++){
-				sb.append(arguments[i]).append(" ");
+	
+	public static void loadListeners() throws Exception {
+		
+		//load features & commands in 'bot.getListenerManager().addListener(new FEATURE_NAME());' format.
+		bot.getListenerManager().addListener(new Welcome());
+	}
+	
+	private static void setupDatabase() {
+		mysql_host = Config.mysql_host;
+		mysql_db = Config.mysql_db;
+		mysql_user = Config.mysql_user;
+		mysql_pass = Config.mysql_pass;
+		mysql_port = Config.mysql_port;
+		
+		mysql = new MySQL(logger, "[CyBot]", mysql_host, mysql_port, mysql_db, mysql_user, mysql_pass);
+		
+		System.out.println("Trying to connect to database...");
+		mysql.open();
+		
+		if (mysql.checkConnection()) {
+			System.out.println("Successfully connected to database!");
+			
+			if (!mysql.checkTable("seenusers")) {
+				System.out.println("Creating table 'seenusers' in database " + mysql_db);
+				mysql.createTable("CREATE TABLE seenusers (id int NOT NULL AUTO_INCREMENT, user VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 			}
-			String allArgs = sb.toString().trim();
-			e.getBot().sendRawLine(allArgs);
-			System.out.println("Executed raw command " + allArgs);
-		}else{
-			e.respond("nope.avi");
+			if (!mysql.checkTable("joinedusers")) {
+				System.out.println("Creating table 'joinedusers' in database " + mysql_db);
+				mysql.createTable("CREATE TABLE joinedusers (id int NOT NULL AUTO_INCREMENT, users VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
+			}
+		} else {
+			System.out.println("Error connecting to database.");
+		}
+		mysql.close();
+	}
+	
+	
+	public static void stopCommand() {
+		Scanner reader = new Scanner(System.in);
+		String command = reader.nextLine();
+		if (command.equals("end")) {
+			bot.shutdown();
+			System.out.println("Goodbye~");
+			System.exit(0);
 		}
 	}
+
+	//add more stuff later
 }
