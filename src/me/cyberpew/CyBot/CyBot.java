@@ -81,12 +81,13 @@ public class CyBot {
 	
 	public static void loadListeners() throws Exception {
 		
-		//#load features & commands in 'bot.getListenerManager().addListener(new FEATURE_NAME());' format.
+		//#load features & commands in 'bot.getListenerManager().addListener(new FEATUREORCOMMAND_NAME());' format.
 		//
 		//Load Features
 		bot.getListenerManager().addListener(new Welcome());
 		bot.getListenerManager().addListener(new SeenMgr());
 		bot.getListenerManager().addListener(new RecieveCookies());
+		bot.getListenerManager().addListener(new SkyNet());
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Seen());
@@ -100,7 +101,9 @@ public class CyBot {
 		bot.getListenerManager().addListener(new MinecraftPaid());
 		bot.getListenerManager().addListener(new Stack());
 		bot.getListenerManager().addListener(new Kill());
+		bot.getListenerManager().addListener(new Info());
 		bot.getListenerManager().addListener(new Nick());
+		bot.getListenerManager().addListener(new SkyNetToggle());
 	}
 	
 	private static void setupDatabase() {
