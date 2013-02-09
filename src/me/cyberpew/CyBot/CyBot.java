@@ -88,6 +88,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new SeenMgr());
 		bot.getListenerManager().addListener(new RecieveCookies());
 		bot.getListenerManager().addListener(new SkyNet());
+		bot.getListenerManager().addListener(new NetCommands());
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Seen());
