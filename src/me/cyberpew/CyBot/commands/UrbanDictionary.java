@@ -82,7 +82,6 @@ public class UrbanDictionary extends ListenerAdapter{
 
 
 			event.respond(best.getString("word") + ": " + definition);
-			//event.getBot().sendMessage(event.getChannel(), String.format("URL: %s", url));
 			}
 		}
 	}
