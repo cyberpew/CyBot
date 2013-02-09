@@ -104,6 +104,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new Info());
 		bot.getListenerManager().addListener(new Nick());
 		bot.getListenerManager().addListener(new SkyNetToggle());
+		bot.getListenerManager().addListener(new Fapget());
 	}
 	
 	private static void setupDatabase() {

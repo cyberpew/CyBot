@@ -11,5 +11,4 @@ public class Info extends ListenerAdapter {
 			event.respond("I am Cyberpew's personal assistant! Type .help for more information.");
 		}
 	}
-
 }
