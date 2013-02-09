@@ -3,7 +3,7 @@ package me.cyberpew.CyBot;
 //Java imports
 import java.io.FileNotFoundException;
 import java.io.IOException;
-//import java.util.Scanner;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 //PircBotX imports
@@ -68,8 +68,8 @@ public class CyBot {
 		
 		loadListeners();
 		
-		//#Broken
-		//stopCommand();
+		
+		stopCommand();
 	}
 	
 	public static void joinChannels() {
@@ -138,17 +138,15 @@ public class CyBot {
 		}
 		mysql.close();
 	}
-	
-//#Broken for now.#//	
-//	public static void stopCommand() {
-//		@SuppressWarnings("resource")
-//		Scanner reader = new Scanner(System.in);
-//		String command = reader.nextLine();
-//		if (command.equals("stop")) {
-//			bot.shutdown();
-//			System.exit(1);
-//		}
-//	}
+		
+	@SuppressWarnings("resource")
+	public static void stopCommand() {
+		Scanner reader = new Scanner(System.in);
+		String command = reader.nextLine();
+		if (command.equals("stop")) {
+			System.exit(0);
+		}
+	}
 
 	//add more stuff later
 }
