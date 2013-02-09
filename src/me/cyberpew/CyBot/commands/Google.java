@@ -54,9 +54,8 @@ public class Google extends ListenerAdapter {
 
 		    event.respond(finaltitle.replace("</b>", ""));
 		    event.respond(results.getResponseData().getResults().get(0).getUrl());
-	    }
-
-	}
+	    	}
+		}
 	}
 
     

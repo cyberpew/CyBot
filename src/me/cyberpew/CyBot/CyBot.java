@@ -106,6 +106,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new SkyNetToggle());
 		bot.getListenerManager().addListener(new Fapget());
 		bot.getListenerManager().addListener(new Rehash());
+		bot.getListenerManager().addListener(new UrbanDictionary());
 	}
 	
 	private static void setupDatabase() {
