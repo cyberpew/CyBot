@@ -36,7 +36,7 @@ public class NetCommands extends ListenerAdapter {
 			}
 		}
 		
-		if(args[0].equals("@port")) {
+		if(args[0].equals(".port")) {
 			Socket sock = null;
 					try {
 						sock = new Socket(args[1], Integer.parseInt(args[2]));
