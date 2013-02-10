@@ -2,20 +2,24 @@
 
 package me.cyberpew.CyBot.commands;
 
-import me.cyberpew.data.JSONParser;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Scanner;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import com.google.gson.Gson;
 
 
 @SuppressWarnings("rawtypes")
 public class UrbanDictionary extends ListenerAdapter{
 	
 	private final int MAX_LENGTH = 400;
+
+	private Gson gson = new Gson();
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
@@ -50,20 +54,24 @@ public class UrbanDictionary extends ListenerAdapter{
 	    if (event.getMessage().startsWith(".ud ") && event.getMessage().contains(outsay)) {
 
 		    String URBAN = "http://api.urbandictionary.com/v0/define?term=";
-
-		    JSONObject result = JSONParser.getJSON(URBAN + URLEncoder.encode(outsay.toString(), "UTF-8"));
-			String matchtype = result.getString("result_type");
+		    final URLConnection c = new URL(URBAN + URLEncoder.encode(outsay.toString(), "UTF-8")).openConnection();
+		    final Scanner s = new Scanner(c.getInputStream());
+		    final StringBuffer buffer = new StringBuffer();
+		    while(s.hasNextLine()) {
+		            buffer.append(s.nextLine());
+		    }
+		    Urban result = gson.fromJson(buffer.toString(), Urban.class);
+			String matchtype = result.result_type;
 			if(!"exact".equals(matchtype)) {
 				event.respond("No results found.");
 				return;
 			}
-			JSONObject best = null;
+			Urban.Item best = null;
 			int bestScore = Integer.MIN_VALUE;
-			JSONArray definitions = result.getJSONArray("list");
-			JSONObject temp;
-			for(int ii = 0; ii < definitions.length(); ii++) {
-				temp = definitions.getJSONObject(ii);
-				int thisScore = temp.getInt("thumbs_up");
+			Urban.Item temp;
+			for(int ii = 0; ii < result.list.length; ii++) {
+				temp = result.list[ii];
+				int thisScore = temp.thumbs_up;
 				if(thisScore > bestScore) {
 					best = temp;
 					bestScore = thisScore;
@@ -73,18 +81,29 @@ public class UrbanDictionary extends ListenerAdapter{
 				event.respond("No results for term found.");
 				return;
 			}
-			definition = best.getString("definition").replaceAll("\\r\\n|\\r|\\n", " ");
-			url = best.getString("permalink");
+			definition = best.definition.replaceAll("\\r\\n|\\r|\\n", " ");
+			url = best.permalink;
 
 			if(definition.length() > MAX_LENGTH) {
 				definition = definition.substring(0, (MAX_LENGTH-2)) + "..";
 			}
 
 
-			event.respond(best.getString("word") + ": " + definition);
+			event.respond(best.word + ": " + definition);
 			}
 		}
 	}
+    
+    private class Urban {
+        public String result_type;
+        public Item[] list; 
+        public class Item {
+            public int thumbs_up;
+            public String definition;
+            public String permalink;
+            public String word;
+        }
+    }
 }
    
 
