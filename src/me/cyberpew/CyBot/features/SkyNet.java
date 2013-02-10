@@ -1,7 +1,5 @@
 package me.cyberpew.CyBot.features;
 
-//import me.cyberpew.CyBot.CyBot;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,14 +25,6 @@ public class SkyNet extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
         String message = event.getMessage();
-        //String[] ArrSay = message.split(" ");
-        //String outsay = "";
-
-       // for (int i = 1; i < ArrSay.length; i++) {
-        //    outsay += ArrSay[i];
-        //}
-
-        //if (event.getMessage().startsWith(CyBot.bot.getNick() + ": ")) {
 
         if (skynetEnabled) {
             event.respond(process(message));
