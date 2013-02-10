@@ -1,4 +1,4 @@
-package me.cyberpew.CyBot.handlers;
+package me.cyberpew.CyBot.console;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;

@@ -2,7 +2,7 @@
 
 package me.cyberpew.CyBot.commands;
 
-import me.cyberpew.Data.JSONParser;
+import me.cyberpew.data.JSONParser;
 
 import java.net.URLEncoder;
 

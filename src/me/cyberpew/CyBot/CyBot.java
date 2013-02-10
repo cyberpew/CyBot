@@ -11,10 +11,10 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
 
 //CyBot imports
-import me.cyberpew.Data.*;
+import me.cyberpew.data.*;
 import me.cyberpew.CyBot.commands.*;
+import me.cyberpew.CyBot.console.*;
 import me.cyberpew.CyBot.features.*;
-import me.cyberpew.CyBot.handlers.*;
 
 public class CyBot {
 	

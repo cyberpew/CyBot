@@ -1,4 +1,4 @@
-package me.cyberpew.Data;
+package me.cyberpew.data;
 
 /**
  * Database Handler

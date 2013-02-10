@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import me.cyberpew.Data.MySQL;
+import me.cyberpew.data.MySQL;
 
 public class Config {
 	
