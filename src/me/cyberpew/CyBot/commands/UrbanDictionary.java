@@ -1,4 +1,4 @@
-//MESSY CODE ALERT
+//MESSY CODE ALERT//
 
 package me.cyberpew.CyBot.commands;
 
