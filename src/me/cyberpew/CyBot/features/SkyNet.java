@@ -27,17 +27,17 @@ public class SkyNet extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
         String message = event.getMessage();
-        String[] ArrSay = message.split(" ");
-        String outsay = "";
+        //String[] ArrSay = message.split(" ");
+        //String outsay = "";
 
-        for (int i = 1; i < ArrSay.length; i++) {
-            outsay += ArrSay[i];
-        }
+       // for (int i = 1; i < ArrSay.length; i++) {
+        //    outsay += ArrSay[i];
+        //}
 
         //if (event.getMessage().startsWith(CyBot.bot.getNick() + ": ")) {
 
         if (skynetEnabled) {
-            event.respond(process(outsay));
+            event.respond(process(message));
         }
 
     }
