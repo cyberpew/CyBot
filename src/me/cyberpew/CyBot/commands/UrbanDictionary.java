@@ -21,7 +21,8 @@ public class UrbanDictionary extends ListenerAdapter{
 
 	private Gson gson = new Gson();
 
-    public void onMessage(MessageEvent event) throws Exception {
+    @SuppressWarnings("resource")
+	public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
 	    String message = event.getMessage();
 
