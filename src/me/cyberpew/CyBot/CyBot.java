@@ -14,6 +14,7 @@ import org.pircbotx.UtilSSLSocketFactory;
 import me.cyberpew.Data.*;
 import me.cyberpew.CyBot.commands.*;
 import me.cyberpew.CyBot.features.*;
+import me.cyberpew.CyBot.handlers.*;
 
 public class CyBot {
 	
@@ -108,6 +109,9 @@ public class CyBot {
 		bot.getListenerManager().addListener(new Fapget());
 		bot.getListenerManager().addListener(new Rehash());
 		bot.getListenerManager().addListener(new UrbanDictionary());
+		
+		//Load handlers
+		bot.getListenerManager().addListener(new Console());
 	}
 	
 	private static void setupDatabase() {

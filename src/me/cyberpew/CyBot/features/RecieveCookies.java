@@ -6,10 +6,7 @@ import org.pircbotx.hooks.events.ActionEvent;
 @SuppressWarnings("rawtypes")
 public class RecieveCookies extends ListenerAdapter {
 	
-	public void onAction(ActionEvent event){
-		String a = String.format("[Action] [%s] %s %s", event.getChannel().getName(), event.getUser().getNick(), event.getAction());
-		System.out.println(a);
-		
+	public void onAction(ActionEvent event){	
 		String action = event.getAction().toLowerCase();
 		String name = event.getBot().getNick().toLowerCase();
 		if(action.contains("gives") && (action.contains(name)) && (action.contains("cookie"))){;
