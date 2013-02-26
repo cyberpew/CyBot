@@ -93,6 +93,7 @@ public class CyBot {
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Help());
+		bot.getListenerManager().addListener(new GTFTS());
 		bot.getListenerManager().addListener(new Seen());
 		bot.getListenerManager().addListener(new Google());
 		bot.getListenerManager().addListener(new Join());

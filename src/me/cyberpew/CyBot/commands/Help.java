@@ -28,6 +28,7 @@ public class Help extends ListenerAdapter {
 			CyBot.bot.sendMessage(event.getUser(), ".listhops - Lists the current channel half-operators.");
 			CyBot.bot.sendMessage(event.getUser(), ".listvoiced - Lists the voiced users in the current channel.");
 			CyBot.bot.sendMessage(event.getUser(), ".stack or .stack <user> - STACKTRACE OR GTFO.");
+			CyBot.bot.sendMessage(event.getUser(), ".gtfts <user> - Tells a user to go to sleep.");
 		}
 		
 		else if (event.getMessage().equals(".help cybot botadmin")) {
