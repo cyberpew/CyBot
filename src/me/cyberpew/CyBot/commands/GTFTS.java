@@ -12,7 +12,7 @@ public class GTFTS extends ListenerAdapter {
 			String[] arguments = event.getMessage().split(" ");
 			if(arguments.length == 2){
 				User u = event.getBot().getUser(arguments[1]);
-				event.getBot().sendMessage(event.getChannel(), u.getNick() + "needs to go the fuck to sleep!");
+				event.getBot().sendMessage(event.getChannel(), u.getNick() + " needs to go the fuck to sleep!");
 			}
 		}
 	}
