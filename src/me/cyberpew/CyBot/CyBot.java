@@ -1,5 +1,3 @@
-//derp
-
 package me.cyberpew.CyBot;
 
 //Java imports
