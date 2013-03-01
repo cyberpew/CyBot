@@ -19,12 +19,12 @@ public class InviteBot extends ListenerAdapter {
 		
 		if (event.getMessage().split(" ").length > 1) {
 			
-			if (event.getMessage().equals("join")) {
+			if (event.getMessage().equals("join") || event.getMessage().equals("request")){
 				event.respond("Please specify a channel to join.");
 			}
 			
 			String channelarg = event.getMessage().split(" ")[1];
-			if (event.getMessage().startsWith("join ") && event.getMessage().contains(channelarg)) {
+			if (event.getMessage().startsWith("join ") || event.getMessage().startsWith("request ") && event.getMessage().contains(channelarg)) {
 				
 				CyBot.bot.sendRawLineNow("join" + " " + channelarg);
 				event.respond("Attempted to join channel " + channelarg);
