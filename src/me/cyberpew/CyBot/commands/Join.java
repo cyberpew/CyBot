@@ -13,7 +13,6 @@ public class Join extends ListenerAdapter {
 		if (event.getMessage().split(" ").length > 1) {
 			
 			if (event.getMessage().equals(".join")) {
-				
 				event.respond("Please specify a channel to join.");
 			}
 			
