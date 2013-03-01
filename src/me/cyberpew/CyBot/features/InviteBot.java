@@ -9,11 +9,13 @@ import org.pircbotx.hooks.events.PrivateMessageEvent;
 @SuppressWarnings("rawtypes")
 public class InviteBot extends ListenerAdapter {
 	//Plan A
-	public void onInvite(InviteEvent event, String user, String channel) throws Exception {
+	public void onInvite(InviteEvent event) throws Exception {
 		
-		System.out.println("I GOT INVITED TO" + channel);
-		CyBot.bot.joinChannel(channel);
-		CyBot.bot.sendMessage(event.getUser(), "Attempting to join " + channel);
+		String channel2join = event.getChannel();
+		
+		System.out.println("I GOT INVITED TO" + channel2join);
+		CyBot.bot.joinChannel(channel2join);
+		CyBot.bot.sendMessage(event.getUser(), "Attempting to join " + channel2join);
 	}
 	//Plan B
 	public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
