@@ -13,7 +13,7 @@ public class InviteBot extends ListenerAdapter {
 		
 		String channel2join = event.getChannel();
 		
-		System.out.println("I GOT INVITED TO" + channel2join);
+		System.out.println("I GOT INVITED TO " + channel2join);
 		CyBot.bot.joinChannel(channel2join);
 		CyBot.bot.sendMessage(event.getUser(), "Attempting to join " + channel2join);
 	}
