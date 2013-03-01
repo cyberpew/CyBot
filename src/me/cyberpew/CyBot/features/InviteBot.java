@@ -11,6 +11,7 @@ public class InviteBot extends ListenerAdapter {
 	//Plan A
 	public void onInvite(InviteEvent event, String user, String channel) throws Exception {
 		
+		System.out.println("I GOT INVITED TO" + channel);
 		CyBot.bot.joinChannel(channel);
 		CyBot.bot.sendMessage(event.getUser(), "Attempting to join " + channel);
 	}
