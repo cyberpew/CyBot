@@ -22,7 +22,6 @@ public class Welcome extends ListenerAdapter {
 				
 				CyBot.mysql.query("INSERT INTO joinedusers (users) VALUES ('" + user + "')");
 				CyBot.mysql.close();
-				event.respond("Hello there!");
 			}
 	}
 
