@@ -90,6 +90,7 @@ public class CyBot {
 		bot.getListenerManager().addListener(new RecieveCookies());
 		bot.getListenerManager().addListener(new SkyNet());
 		bot.getListenerManager().addListener(new NetCommands());
+		bot.getListenerManager().addListener(new InviteBot());
 		
 		//Load Commands
 		bot.getListenerManager().addListener(new Help());

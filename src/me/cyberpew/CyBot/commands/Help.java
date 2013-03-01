@@ -29,13 +29,30 @@ public class Help extends ListenerAdapter {
 			CyBot.bot.sendMessage(event.getUser(), ".listvoiced - Lists the voiced users in the current channel.");
 			CyBot.bot.sendMessage(event.getUser(), ".stack or .stack <user> - STACKTRACE OR GTFO.");
 			CyBot.bot.sendMessage(event.getUser(), ".gtfts <user> - Tells a user to go to sleep.");
+			CyBot.bot.sendMessage(event.getUser(), "---------------- Want CyBot in your channel? ----------------");
+			CyBot.bot.sendMessage(event.getUser(), "Type '.help cybot join' for information.");
+			CyBot.bot.sendMessage(event.getUser(), "---------------- Bot Admin only commands ----------------");
+			CyBot.bot.sendMessage(event.getUser(), "For bot admin commands type '.help cybot botadmin'");
 		}
 		
 		else if (event.getMessage().equals(".help cybot botadmin")) {
-			event.respond("Check your private messages, I've sent you some help files.");
 			CyBot.bot.sendMessage(event.getUser(), "---------------- CyBot Helpfiles ----------------");
-			CyBot.bot.sendMessage(event.getUser(), "--------------- Bot Admin Commands ---------------");
+			CyBot.bot.sendMessage(event.getUser(), "-------------- CyBot Admin Commands -------------");
 			CyBot.bot.sendMessage(event.getUser(), "Coming soon...");
+		}
+		
+		else if (event.getMessage().equals(".help cybot join")) {
+			CyBot.bot.sendMessage(event.getUser(), "---------------- CyBot Helpfiles ----------------");
+			CyBot.bot.sendMessage(event.getUser(), "------ Getting CyBot to join your channel? ------");
+			CyBot.bot.sendMessage(event.getUser(), "To get CyBot to join your channel, simply type /invite CyBot #yourchannel");
+			CyBot.bot.sendMessage(event.getUser(), "---------------- Want CyBot to auto-join your channel? ----------------");
+			CyBot.bot.sendMessage(event.getUser(), "Type '.help cybot autojoin' for information.");
+		}
+		
+		else if (event.getMessage().equals(".help cybot autojoin")) {
+			CyBot.bot.sendMessage(event.getUser(), "---------------- CyBot Helpfiles ----------------");
+			CyBot.bot.sendMessage(event.getUser(), "--------------- CyBot Auto-joining ---------------");
+			CyBot.bot.sendMessage(event.getUser(), "If you'd like me to auto-join your channel whenever I am restarted, please type /msg Cyberpew AUTOJOIN CyBot to #yourchannel");
 		}
 	}
 }
