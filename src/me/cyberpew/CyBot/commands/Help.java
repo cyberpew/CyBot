@@ -44,8 +44,8 @@ public class Help extends ListenerAdapter {
 		else if (event.getMessage().equals(".help cybot join")) {
 			CyBot.bot.sendMessage(event.getUser(), "---------------- CyBot Helpfiles ----------------");
 			CyBot.bot.sendMessage(event.getUser(), "------ Getting CyBot to join your channel? ------");
-			CyBot.bot.sendMessage(event.getUser(), "To get CyBot to join your channel, simply type /msg CyBot join(or)request #yourchannel");
-			CyBot.bot.sendMessage(event.getUser(), "Ex. /msg CyBot join #Cybot");
+			CyBot.bot.sendMessage(event.getUser(), "To get CyBot to join your channel, simply type /invite CyBot #yourchannel");
+			CyBot.bot.sendMessage(event.getUser(), "Ex. /invite CyBot #Cybot");
 			CyBot.bot.sendMessage(event.getUser(), "Want him removed? Do /msg Cyberpew remove CyBot #yourchannel");
 			CyBot.bot.sendMessage(event.getUser(), "---------------- Want CyBot to auto-join your channel? ----------------");
 			CyBot.bot.sendMessage(event.getUser(), "Type '.help cybot autojoin' for information.");
