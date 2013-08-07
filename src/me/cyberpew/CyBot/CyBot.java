@@ -1,3 +1,5 @@
+// Copyright 2013 Andrew Calvert
+
 package me.cyberpew.CyBot;
 
 //Java imports
