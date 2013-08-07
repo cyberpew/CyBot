@@ -11,47 +11,55 @@ import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PartEvent;
 
+import me.cyberpew.data.MySQL;
 import me.cyberpew.CyBot.CyBot;
 
 @SuppressWarnings("rawtypes")
 public class SeenMgr extends ListenerAdapter {
 	
 	public void onJoin(JoinEvent event) throws SQLException {
+		MySQL mysql = new MySQL(CyBot.logger, "[CyBot]", CyBot.mysql_host, CyBot.mysql_port, CyBot.mysql_db, CyBot.mysql_user, CyBot.mysql_pass);
+		
 		String user = event.getUser().getNick();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String lastseen = dateFormat.format(date);
-		CyBot.mysql.open();
 		
-		ResultSet rs = CyBot.mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
+		mysql.open();
+		
+		ResultSet rs = mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
 		
 		if(rs.next()) {
-			CyBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+			mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
 		} else {
-			CyBot.mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
+			mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
 		}
-		CyBot.mysql.close();
+		mysql.close();
 	}
 	
 	public void onPart(PartEvent event) {
+		MySQL mysql = new MySQL(CyBot.logger, "[CyBot]", CyBot.mysql_host, CyBot.mysql_port, CyBot.mysql_db, CyBot.mysql_user, CyBot.mysql_pass);
+		
 		String user = event.getUser().getNick();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String lastseen = dateFormat.format(date);
 		
-		CyBot.mysql.open();
-		CyBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-		CyBot.mysql.close();
+		mysql.open();
+		mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+		mysql.close();
 	}
 	
 	public void onMessage(MessageEvent event) {
-		CyBot.mysql.open();
+		MySQL mysql = new MySQL(CyBot.logger, "[CyBot]", CyBot.mysql_host, CyBot.mysql_port, CyBot.mysql_db, CyBot.mysql_user, CyBot.mysql_pass);
+		
+		mysql.open();
 		String user = event.getUser().getNick();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		String lastseen = dateFormat.format(date);
 		try {
-			CyBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+			mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
 		} catch (Exception e){
 			
 		}

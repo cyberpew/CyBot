@@ -27,11 +27,11 @@ public class CyBot {
 	public static PircBotX bot = new PircBotX();
 	public final static Logger logger = Logger.getLogger("CyBot");
 	
-	static String mysql_host;
-    static String mysql_db;
-    static String mysql_user;
-    static String mysql_pass;
-    static String mysql_port;
+	public static String mysql_host;
+    public static String mysql_db;
+    public static String mysql_user;
+    public static String mysql_pass;
+    public static String mysql_port;
     public static MySQL mysql;
 	
     public static void main(String[] args) throws Exception, FileNotFoundException, IOException {
