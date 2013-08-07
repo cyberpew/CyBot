@@ -2,19 +2,25 @@ package me.cyberpew.CyBot;
 
 //Java imports
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+
+
 //PircBotX imports
 import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
+
+
 
 //CyBot imports
 import me.cyberpew.data.*;
 import me.cyberpew.CyBot.commands.*;
 import me.cyberpew.CyBot.console.*;
 import me.cyberpew.CyBot.features.*;
+import me.cyberpew.CyBot.Config;
 
 public class CyBot {
 	
@@ -28,16 +34,31 @@ public class CyBot {
     static String mysql_port;
     public static MySQL mysql;
 	
-    public static void main(String[] args) throws Exception,
-			FileNotFoundException, IOException {
-		
-		//Load properties
+    public static void main(String[] args) throws Exception, FileNotFoundException, IOException {
+    	//Load properties
 		try {
-			
 			Config.loadConfig();
-			
 		} catch (FileNotFoundException ex) {
-			//generate file if does not exist 
+			Config.config.setProperty("nick", "CyBot");
+			Config.config.setProperty("user", "CyBot");
+			Config.config.setProperty("server", "irc.xir.me");
+			Config.config.setProperty("port", "6667");
+			Config.config.setProperty("SSL", "false");
+			Config.config.setProperty("pass", "");
+			Config.config.setProperty("serverpass", "");
+			Config.config.setProperty("channels", "#cyberspace");
+			Config.config.setProperty("messagedelay", "1000");
+			Config.config.setProperty("admins", "Cyberpew");
+			
+			Config.config.setProperty("mysql_host", "");
+			Config.config.setProperty("mysql_db", "");
+			Config.config.setProperty("mysql_user", "");
+			Config.config.setProperty("mysql_pass", "");
+			Config.config.setProperty("mysql_port", "3306");
+			
+			Config.config.store(new FileOutputStream("CyBot.properties"), null);
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 		
 		//Connect Block
