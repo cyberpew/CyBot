@@ -1,10 +1,9 @@
 package me.cyberpew.CyBot.features;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
+import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.MessageEvent;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,9 +13,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.MessageEvent;
 
 @SuppressWarnings("rawtypes")
 public class SkyNet extends ListenerAdapter {
@@ -58,7 +54,7 @@ public class SkyNet extends ListenerAdapter {
         builder.append('&');
         builder.append(URLEncoder.encode("icognocheck", "UTF-8"));
         builder.append('=');
-        builder.append(URLEncoder.encode(String.format("%1$032X", new Object[] { new BigInteger(1, md5.digest()) }), "UTF-8"));
+        builder.append(URLEncoder.encode(String.format("%1$032X", new Object[]{new BigInteger(1, md5.digest())}), "UTF-8"));
 
         URLConnection urlConnection = new URL("http://cleverbot.com/webservicemin").openConnection();
         urlConnection.setDoOutput(true);
